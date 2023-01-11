@@ -32,4 +32,15 @@ Class Router
 
         return $uri;
     }
+
+    /**
+     * For executing the function
+     */
+    public function execute($fn, $params = []): void
+    {
+        if(is_callable($fn)){
+            call_user_func_array($fn, $params);
+            return;
+        }
+    }
 }
