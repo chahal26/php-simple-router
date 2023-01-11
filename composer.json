@@ -1,0 +1,17 @@
+{
+    "name": "chahal26/php-simple-router",
+    "description": "Simple Routing made with OOPS in PHP",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Chahal26\\PhpSimpleRouter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sahil Chahal",
+            "email": "dev.sahilchahal@gmail.com"
+        }
+    ],
+    "require": {}
+}
