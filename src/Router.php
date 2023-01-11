@@ -4,6 +4,19 @@ namespace Chahal26\PhpSimpleRouter;
 Class Router 
 {
     /**
+     * Current URI
+     */
+    private string $current_uri;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->current_uri = $this->getCurrentUri();
+    }
+
+    /**
      * Get Current Request URI
      */
     public function getCurrentUri():string
