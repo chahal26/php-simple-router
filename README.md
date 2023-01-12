@@ -10,6 +10,14 @@ It currently supports static routes only.
 - PHP >= 8.0
 - [URL Rewriting](https://gist.github.com/chahal26/b6233a6e6a93321c6eae0a05ba9954b5)
 
+## Installation
+
+`chahal26/php-simple-router` can be easily installed using
+
+```sh
+    composer require chahal26/php-simple-router:dev-master
+```
+
 ## Usage
 
 Create an instance of `\Chahal26\PhpSimpleRouter\Router`, define some routes, and run it.
