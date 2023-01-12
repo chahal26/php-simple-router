@@ -15,7 +15,7 @@ It currently supports static routes only.
 `chahal26/php-simple-router` can be easily installed using
 
 ```sh
-    composer require chahal26/php-simple-router:dev-master
+    composer require chahal26/php-simple-router
 ```
 
 ## Usage
