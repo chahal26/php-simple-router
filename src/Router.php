@@ -51,7 +51,7 @@ Class Router
     /**
      * Collects all routes in an array
      */
-    public function getRoutesArray($methods, $route, $fn):void
+    public function addToRoutesArray($methods, $route, $fn):void
     {
         $methods = $methods ?? $this->available_methods;
 
@@ -63,4 +63,28 @@ Class Router
         }
     }
 
+    /**
+     * Accepts GET method only
+     */
+    public function get($route, $fn):void
+    {
+        $this->addToRoutesArray(['GET'], $route, $fn);
+    }
+
+    /**
+     * Accepts POST method only
+     */
+    public function post($route, $fn):void
+    {
+        $this->addToRoutesArray(['POST'], $route, $fn);
+    }
+
+    /**
+     * Runs the required route after checking 
+     */
+    public function run():void
+    {
+        echo "<pre>";
+        print_r($this->available_routes);
+    }
 }
