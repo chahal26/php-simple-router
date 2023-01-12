@@ -21,6 +21,14 @@ Class Router
     }
 
     /**
+     * Get Current Request Method
+     */
+    public function getCurrentRequestMethod():string
+    {
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
+    /**
      * Get Current Request URI
      */
     public function getCurrentUri():string
@@ -54,12 +62,10 @@ Class Router
     public function addToRoutesArray($methods, $route, $fn):void
     {
         $methods = $methods ?? $this->available_methods;
+        $route = '/'.trim($route, '/');
 
         foreach ($methods as $method) {
-            $this->available_routes[$method][] = [
-                'route' => $route,
-                'fn' => $fn,
-            ]; 
+            $this->available_routes[$method][$route] = $fn; 
         }
     }
 
@@ -83,8 +89,20 @@ Class Router
      * Runs the required route after checking 
      */
     public function run():void
-    {
-        echo "<pre>";
-        print_r($this->available_routes);
+    {   
+
+        foreach ($this->available_routes as $method => $routeArray) {
+            if($method === $this->getCurrentRequestMethod()){
+                foreach ($routeArray as $route => $fn)
+                {
+                    if($route === $this->current_uri)
+                    {
+                        $this->execute($fn);
+                        break;
+                    }
+                }
+                
+            }
+        }
     }
 }
