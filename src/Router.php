@@ -49,7 +49,7 @@ Class Router
     }
 
     /**
-     * Mactch the routes
+     * Collects all routes in an array
      */
     public function getRoutesArray($methods, $route, $fn):void
     {
