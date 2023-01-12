@@ -90,7 +90,8 @@ Class Router
      */
     public function run():void
     {   
-
+        $routesMatched = 0;
+        
         foreach ($this->available_routes as $method => $routeArray) {
             if($method === $this->getCurrentRequestMethod()){
                 foreach ($routeArray as $route => $fn)
@@ -98,11 +99,17 @@ Class Router
                     if($route === $this->current_uri)
                     {
                         $this->execute($fn);
+                        $routesMatched ++;
                         break;
                     }
                 }
                 
             }
+        }
+
+        if($routesMatched === 0)
+        {
+            header("HTTP/1.0 404 Not Found");
         }
     }
 }
