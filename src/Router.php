@@ -8,6 +8,10 @@ Class Router
      */
     private string $current_uri;
 
+    private array $available_routes;
+
+    private array $available_methods = ['GET', 'POST'];
+
     /**
      * Constructor
      */
@@ -43,4 +47,20 @@ Class Router
             return;
         }
     }
+
+    /**
+     * Mactch the routes
+     */
+    public function getRoutesArray($methods, $route, $fn):void
+    {
+        $methods = $methods ?? $this->available_methods;
+
+        foreach ($methods as $method) {
+            $this->available_routes[$method][] = [
+                'route' => $route,
+                'fn' => $fn,
+            ]; 
+        }
+    }
+
 }
