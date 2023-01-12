@@ -8,12 +8,24 @@ Class Router
      */
     private string $current_uri;
 
+    private array $available_routes;
+
+    private array $available_methods = ['GET', 'POST'];
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->current_uri = $this->getCurrentUri();
+    }
+
+    /**
+     * Get Current Request Method
+     */
+    public function getCurrentRequestMethod():string
+    {
+        return $_SERVER['REQUEST_METHOD'];
     }
 
     /**
@@ -41,6 +53,63 @@ Class Router
         if(is_callable($fn)){
             call_user_func_array($fn, $params);
             return;
+        }
+    }
+
+    /**
+     * Collects all routes in an array
+     */
+    public function addToRoutesArray($methods, $route, $fn):void
+    {
+        $methods = $methods ?? $this->available_methods;
+        $route = '/'.trim($route, '/');
+
+        foreach ($methods as $method) {
+            $this->available_routes[$method][$route] = $fn; 
+        }
+    }
+
+    /**
+     * Accepts GET method only
+     */
+    public function get($route, $fn):void
+    {
+        $this->addToRoutesArray(['GET'], $route, $fn);
+    }
+
+    /**
+     * Accepts POST method only
+     */
+    public function post($route, $fn):void
+    {
+        $this->addToRoutesArray(['POST'], $route, $fn);
+    }
+
+    /**
+     * Runs the required route after checking 
+     */
+    public function run():void
+    {   
+        $routesMatched = 0;
+        
+        foreach ($this->available_routes as $method => $routeArray) {
+            if($method === $this->getCurrentRequestMethod()){
+                foreach ($routeArray as $route => $fn)
+                {
+                    if($route === $this->current_uri)
+                    {
+                        $this->execute($fn);
+                        $routesMatched ++;
+                        break;
+                    }
+                }
+                
+            }
+        }
+
+        if($routesMatched === 0)
+        {
+            header("HTTP/1.0 404 Not Found");
         }
     }
 }
