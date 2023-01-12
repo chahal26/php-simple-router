@@ -2,6 +2,8 @@
     "name": "chahal26/php-simple-router",
     "description": "Simple Routing made with OOPS in PHP",
     "type": "library",
+    "keywords": ["router","routing", "php-router"],
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Chahal26\\PhpSimpleRouter\\": "src/"
@@ -13,5 +15,7 @@
             "email": "dev.sahilchahal@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=8.0.0"
+    }
 }
