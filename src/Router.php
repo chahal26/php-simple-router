@@ -54,6 +54,14 @@ Class Router
             call_user_func_array($fn, $params);
             return;
         }
+        
+        if(strpos( $fn, '@')){
+            list($controller, $method) = explode('@', $fn);
+            $instance = new $controller();
+            $instance->$method();
+            return;
+        }
+
     }
 
     /**

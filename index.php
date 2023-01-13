@@ -1,5 +1,6 @@
 <?php
     require_once 'vendor/autoload.php';
+   
     use Chahal26\PhpSimpleRouter\Router;
 
     /* Creating Route Instance */
@@ -9,6 +10,8 @@
     $router->get('/', function(){
         echo "<h1>Welcome To Home Page</h1>";
     });
+
+    $router->get('/test', '\App\Controllers\TestController@index');
     $router->get('register', function(){
         echo "<h1>Welcome To Register Page</h1>";
     });
