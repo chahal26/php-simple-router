@@ -11,7 +11,7 @@
         echo "<h1>Welcome To Home Page</h1>";
     });
 
-    $router->get('/test', '\App\Controllers\TestController@index');
+    $router->get('/about', '\App\Controllers\PagesController@about');
     $router->get('register', function(){
         echo "<h1>Welcome To Register Page</h1>";
     });
