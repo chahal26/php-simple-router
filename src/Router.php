@@ -12,6 +12,8 @@ Class Router
 
     private array $available_methods = ['GET', 'POST'];
 
+    private string $namespace = '';
+
     /**
      * Constructor
      */
@@ -26,6 +28,14 @@ Class Router
     public function getCurrentRequestMethod():string
     {
         return $_SERVER['REQUEST_METHOD'];
+    }
+
+    /**
+     * Sets Namespace for all routes
+     */
+    public function setNamespace(string $namespace):void
+    {
+        $this->namespace = $namespace;
     }
 
     /**
@@ -57,6 +67,12 @@ Class Router
         
         if(strpos( $fn, '@')){
             list($controller, $method) = explode('@', $fn);
+
+            if($this->namespace !== '')
+            {
+                $controller = $this->namespace.'\\'.$controller;
+            }
+
             $instance = new $controller();
             call_user_func_array(array($instance, $method), $params);
             return;
