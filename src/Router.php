@@ -58,7 +58,7 @@ Class Router
         if(strpos( $fn, '@')){
             list($controller, $method) = explode('@', $fn);
             $instance = new $controller();
-            $instance->$method();
+            call_user_func_array(array($instance, $method), $params);
             return;
         }
 
