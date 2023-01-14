@@ -110,6 +110,14 @@ Class Router
     }
 
     /**
+     * To Check if same pattern exists
+     */
+    protected function checkIfPatternExists(): bool
+    {
+        
+    }
+
+    /**
      * Runs the required route after checking 
      */
     public function run():void
