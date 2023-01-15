@@ -44,9 +44,23 @@ Create an instance of `\Chahal26\PhpSimpleRouter\Router`, define some routes, an
 
 ## Defining Routes
 
+### Static Routes
+
 ```php
 $router->get('route', function() { /* ... */ });
 $router->post('route', function() { /* ... */ });
+```
+### With Controller
+
+```php
+    $router->get('/about', '\App\Controllers\PagesController@about');
+```
+
+Or a namespace can also be defined
+
+```php
+    $router->setNamespace('\App\Controllers');
+    $router->get('/about', 'PagesController@about');
 ```
 
 ## Example
