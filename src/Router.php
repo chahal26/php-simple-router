@@ -112,9 +112,14 @@ Class Router
     /**
      * To Check if same pattern exists
      */
-    protected function checkIfPatternExists(): bool
+    protected function checkIfPatternExists($route): bool
     {
-        
+        if($route === $this->current_uri)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -128,7 +133,7 @@ Class Router
             if($method === $this->getCurrentRequestMethod()){
                 foreach ($routeArray as $route => $fn)
                 {
-                    if($route === $this->current_uri)
+                    if($this->checkIfPatternExists($route))
                     {
                         $this->execute($fn);
                         $routesMatched ++;
